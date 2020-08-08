@@ -386,13 +386,13 @@ static void ui_draw_vision_maxspeed(UIState *s) {
     return;
   }*/
   char maxspeed_str[32];
-  float maxspeed = s->scene.controls_state.getVCruise() * 1.065;
-  int maxspeed_calc = maxspeed * 0.6225 + 0.5;
+  float maxspeed = s->scene.controls_state.getVCruise();
+  int maxspeed_calc = maxspeed * 1.065 * 0.6225 + 0.5;
   float speedlimit = s->scene.speedlimit;
   int speedlim_calc = speedlimit * 2.2369363 + 0.5;
   int speed_lim_off = s->speed_lim_off * 2.2369363 + 0.5;
   if (s->is_metric) {
-    maxspeed_calc = maxspeed + 0.5;
+    maxspeed_calc = maxspeed * 1.065 + 0.5;
     speedlim_calc = speedlimit * 3.6 + 0.5;
     speed_lim_off = s->speed_lim_off * 3.6 + 0.5;
   }
