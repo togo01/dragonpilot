@@ -758,6 +758,15 @@ static void ui_draw_infobar(UIState *s) {
   char battery[5];
   snprintf(battery, sizeof(battery), "%02d%%", scene->thermal.getBatteryPercent());
 
+  // Create real speed string
+  char realSpeed[11];
+  snprintf(realSpeed, sizeof(realSpeed), "%02.3f m/s", scene->controls_state.getVEgo());
+
+  // Create acc speed string
+  char accSpeed[11];
+  snprintf(accSpeed, sizeof(accSpeed), "%03.2f kph", scene->controls_state.getVCruise());
+
+
   if (false) {
     char rel_steer[9];
     snprintf(rel_steer, sizeof(rel_steer), "%s%05.1f°", scene->controls_state.getAngleSteers() < 0? "-" : "+", fabs(scene->angleSteers));
@@ -791,10 +800,12 @@ static void ui_draw_infobar(UIState *s) {
     snprintf(
       infobar,
       sizeof(infobar),
-      "%s /TMP: %s /BAT: %s",
+      "%s /TMP: %s /BAT: %s /SPD: %s /ACC: %s",
       date_time,
       temp,
-      battery
+      battery,
+      realSpeed,
+      accSpeed
     );
   }
 
