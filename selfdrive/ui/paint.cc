@@ -803,7 +803,6 @@ static void ui_draw_infobar(UIState *s) {
       "%s | 溫度: %s | 速度: %s | 定速: %s",
       date_time,
       temp,
-      battery,
       realSpeed,
       accSpeed
     );
