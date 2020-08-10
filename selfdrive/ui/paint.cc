@@ -764,7 +764,7 @@ static void ui_draw_infobar(UIState *s) {
 
   // Create acc speed string
   char accSpeed[11];
-  snprintf(accSpeed, sizeof(accSpeed), "%03.2f kph", scene->controls_state.getVCruise());
+  snprintf(accSpeed, sizeof(accSpeed), "%02.3f m/s", scene->controls_state.getVCruiseRaw());
 
 
   if (false) {
@@ -800,7 +800,7 @@ static void ui_draw_infobar(UIState *s) {
     snprintf(
       infobar,
       sizeof(infobar),
-      "%s /TMP: %s /BAT: %s /SPD: %s /ACC: %s",
+      "%s | 溫度: %s | 速度: %s | 定速: %s",
       date_time,
       temp,
       battery,
