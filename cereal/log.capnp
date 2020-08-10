@@ -509,6 +509,7 @@ struct ControlsState @0x97ff69c53601abf1 {
   steerOverride @20 :Bool;
 
   vCruise @22 :Float32;
+  vCruiseRaw @58 :Float32;
 
   rearViewCam @23 :Bool;
   alertText1 @24 :Text;
