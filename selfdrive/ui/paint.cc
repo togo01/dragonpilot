@@ -814,7 +814,7 @@ static void ui_draw_infobar(UIState *s) {
   nvgFill(s->vg);
 
   nvgFontSize(s->vg, hasSidebar? 35:42);
-  nvgFontFaceId(s->vg, s->font_courbd);
+  nvgFontFaceId(s->vg,  s->font_sans_regular);
   nvgFillColor(s->vg, COLOR_WHITE_ALPHA(200));
   nvgTextAlign(s->vg, NVG_ALIGN_CENTER);
   nvgText(s->vg, text_x, text_y, infobar, NULL);
