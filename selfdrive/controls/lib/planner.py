@@ -58,7 +58,7 @@ _DP_CRUISE_MIN_BP = [0.0, 5.0, 10.0, 20.0, 55.0]
 #  0, 18, 36, 72, 198 km/h
 _DP_CRUISE_MAX_BP = [0.0, 5.0, 10.0, 20.0, 55.0]
 _DP_CRUISE_MAX_V = [2.0, 2.0, 1.5, .5, .3]
-_DP_CRUISE_MAX_V_ECO = [0.5, 0.5, 0.5, 0.4, 0.2]
+_DP_CRUISE_MAX_V_ECO = [0.7, 0.65, 0.5, 0.4, 0.2]
 _DP_CRUISE_MAX_V_SPORT = [3.0, 3.5, 3.0, 2.0, 2.0]
 _DP_CRUISE_MAX_V_FOLLOWING = [1.6, 1.4, 1.4, .7, .3]
 
