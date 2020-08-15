@@ -80,17 +80,17 @@ class CarState(CarStateBase):
     if self.CP.carFingerprint in [CAR.LEXUS_IS, CAR.LEXUS_NXT]:
       ret.cruiseState.available = cp.vl["DSU_CRUISE"]['MAIN_ON'] != 0
       ret.cruiseState.speed = cp.vl["DSU_CRUISE"]['SET_SPEED'] * CV.KPH_TO_MS
-      ret.cruiseState.speed_kph = cp.vl["DSU_CRUISE"]['SET_SPEED']
+      ret.cruiseState.speedRaw = cp.vl["DSU_CRUISE"]['SET_SPEED']
       self.low_speed_lockout = False
     elif self.CP.carFingerprint in [CAR.LEXUS_ISH, CAR.LEXUS_GSH]:
       ret.cruiseState.available = cp.vl["PCM_CRUISE_ALT"]['MAIN_ON'] != 0
       ret.cruiseState.speed = cp.vl["PCM_CRUISE_ALT"]['SET_SPEED'] * CV.KPH_TO_MS
-      ret.cruiseState.speed_kph = cp.vl["PCM_CRUISE_ALT"]['SET_SPEED']
+      ret.cruiseState.speedRaw = cp.vl["PCM_CRUISE_ALT"]['SET_SPEED']
       self.low_speed_lockout = False
     else:
       ret.cruiseState.available = cp.vl["PCM_CRUISE_2"]['MAIN_ON'] != 0
       ret.cruiseState.speed = cp.vl["PCM_CRUISE_2"]['SET_SPEED'] * CV.KPH_TO_MS
-      ret.cruiseState.speed_kph = cp.vl["PCM_CRUISE_2"]['SET_SPEED']
+      ret.cruiseState.speedRaw = cp.vl["PCM_CRUISE_2"]['SET_SPEED']
       self.low_speed_lockout = cp.vl["PCM_CRUISE_2"]['LOW_SPEED_LOCKOUT'] == 2
     if self.CP.carFingerprint in [CAR.LEXUS_ISH, CAR.LEXUS_GSH]:
       # Lexus ISH does not have CRUISE_STATUS value (always 0), so we use CRUISE_ACTIVE value instead
