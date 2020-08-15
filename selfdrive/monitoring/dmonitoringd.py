@@ -34,6 +34,7 @@ def dmonitoringd_thread(sm=None, pm=None):
   sm['carState'].vEgo = 0.
   sm['carState'].cruiseState.enabled = False
   sm['carState'].cruiseState.speed = 0.
+  sm['carState'].cruiseState.speed_kph = 0.
   sm['carState'].buttonEvents = []
   sm['carState'].steeringPressed = False
   sm['carState'].gasPressed = False
