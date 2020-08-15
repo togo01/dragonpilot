@@ -311,7 +311,7 @@ class Controls:
     elif self.CP.enableCruise and CS.cruiseState.enabled:
       self.v_cruise_kph = CS.cruiseState.speed * CV.MS_TO_KPH
 
-    self.v_cruise_raw = CS.cruiseState.speed
+    self.v_cruise_raw = CS.cruiseState.speed_kph
 
     # decrease the soft disable timer at every step, as it's reset on
     # entrance in SOFT_DISABLING state
