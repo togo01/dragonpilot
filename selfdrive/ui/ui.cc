@@ -468,6 +468,8 @@ void handle_message(UIState *s, SubMaster &sm) {
     scene.isReversing = data.getGearShifter() == cereal::CarState::GearShifter::REVERSE;
     scene.leftBlindspot = data.getLeftBlindspot();
     scene.rightBlindspot = data.getRightBlindspot();
+    scene.gas = data.getGas();
+    scene.brake = data.getBrake();
   }
 
   s->started = scene.thermal.getStarted() || s->preview_started;

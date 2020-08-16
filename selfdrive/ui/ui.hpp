@@ -176,6 +176,9 @@ typedef struct UIScene {
   // for blind spot
   bool leftBlindspot;
   bool rightBlindspot;
+  // for Status
+  float gas;
+  float brake;
 
   // for updating icon
   int dp_alert_rate;

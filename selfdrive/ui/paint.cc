@@ -779,9 +779,12 @@ static void ui_draw_infobar(UIState *s) {
   char realSpeed[11];
   snprintf(realSpeed, sizeof(realSpeed), "%02.3f m/s", scene->controls_state.getVEgo());
 
-  // Create acc speed string
-  char accSpeed[11];
-  snprintf(accSpeed, sizeof(accSpeed), "%02.3f m/s", scene->controls_state.getUiAccelCmd());
+  // Create gas and brake string
+  char gas[7];
+  snprintf(gas, sizeof(gas), "%02.3f", scene->gas);
+
+  char brake[7];
+  snprintf(brake, sizeof(brake), "%02.3f", scene->brake);
 
 
   if (false) {
@@ -817,11 +820,12 @@ static void ui_draw_infobar(UIState *s) {
     snprintf(
       infobar,
       sizeof(infobar),
-      "%s | 溫度: %s | 速度: %s | 定速: %s",
+      "%s | 溫度: %s | 速度: %s | 油門: %s | 煞車: %s",
       date_time,
       temp,
       realSpeed,
-      accSpeed
+      gas,
+      brake
     );
   }
 
@@ -830,7 +834,7 @@ static void ui_draw_infobar(UIState *s) {
   nvgFillColor(s->vg, (scene->brakeLights? COLOR_RED_ALPHA(200) : COLOR_BLACK_ALPHA(scene->dpAppWaze? 150 : 100)));
   nvgFill(s->vg);
 
-  nvgFontSize(s->vg, hasSidebar? 35:42);
+  nvgFontSize(s->vg, hasSidebar? 40:47);
   nvgFontFaceId(s->vg,  s->font_sans_regular);
   nvgFillColor(s->vg, COLOR_WHITE_ALPHA(200));
   nvgTextAlign(s->vg, NVG_ALIGN_CENTER);
