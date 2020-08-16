@@ -563,7 +563,7 @@ static void ui_draw_vision_event(UIState *s) {
     const int img_wheel_x = bg_wheel_x-(img_wheel_size/2);
     const int img_wheel_y = bg_wheel_y-25;
     const float img_rotation = s->scene.angleSteers/180*3.141592;
-    bool is_engaged = (s->status == STATUS_ENGAGED) && !s->scene.steerOverride;
+    bool is_engaged = (s->status == STATUS_ENGAGED);
     bool is_warning = (s->status == STATUS_WARNING);
     bool is_engageable = s->scene.controls_state.getEngageable();
     if (is_engaged || is_warning || is_engageable) {
@@ -577,14 +577,13 @@ static void ui_draw_vision_event(UIState *s) {
         nvgFillColor(s->vg, nvgRGBA(23, 51, 73, 255));
       }
       nvgFill(s->vg);
-      img_wheel_alpha = 1.0f;
     }
     nvgSave(s->vg);
     nvgTranslate(s->vg,bg_wheel_x,(bg_wheel_y + (bdr_s*1.5)));
     nvgRotate(s->vg,-img_rotation);
     nvgBeginPath(s->vg);
     NVGpaint imgPaint = nvgImagePattern(s->vg, img_wheel_x-bg_wheel_x, img_wheel_y-(bg_wheel_y + (bdr_s*1.5)),
-	    img_wheel_size, img_wheel_size, 0, s->img_wheel, img_wheel_alpha);
+	    img_wheel_size, img_wheel_size, 0, s->img_wheel, 1.0f);
     nvgRect(s->vg, img_wheel_x-bg_wheel_x, img_wheel_y-(bg_wheel_y + (bdr_s*1.5)), img_wheel_size, img_wheel_size);
     nvgFillPaint(s->vg, imgPaint);
     nvgFill(s->vg);
