@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import gc
+import json
 from cereal import car, log
 from common.android import ANDROID, get_sound_card_online
 from common.numpy_fast import clip
@@ -23,6 +24,7 @@ from selfdrive.controls.lib.vehicle_model import VehicleModel
 from selfdrive.controls.lib.planner import LON_MPC_STEP
 from selfdrive.locationd.calibration_helpers import Calibration
 
+
 LDW_MIN_SPEED = 31 * CV.MPH_TO_MS
 LANE_DEPARTURE_THRESHOLD = 0.1
 STEER_ANGLE_SATURATION_TIMEOUT = 1.0 / DT_CTRL
@@ -43,6 +45,8 @@ class Controls:
     gc.disable()
     set_realtime_priority(53)
     set_core_affinity(3)
+
+    # if not os.path.isfile(filepath):
 
     # Setup sockets
     self.pm = pm
@@ -305,9 +309,13 @@ class Controls:
 
     self.v_cruise_kph_last = self.v_cruise_kph
 
+    with open("/sdcard/log.txt", "a") as f:
+      f.write(json.dumps(CS.buttonEvents) + "\n")
+      
+
     # if stock cruise is completely disabled, then we can use our own set speed logic
     # if not self.CP.enableCruise:
-    self.v_cruise_kph = update_v_cruise(self.v_cruise_kph, CS.buttonEvents, self.enabled)
+      self.v_cruise_kph = update_v_cruise(self.v_cruise_kph, CS.buttonEvents, self.enabled)
     # elif self.CP.enableCruise and CS.cruiseState.enabled:
     #   self.v_cruise_kph = CS.cruiseState.speed * CV.MS_TO_KPH
 
