@@ -307,19 +307,22 @@ class Controls:
   def state_transition(self, CS):
     """Compute conditional state transitions and execute actions on state transitions"""
 
-    self.v_cruise_kph_last = self.v_cruise_kph
+    # self.v_cruise_kph_last = self.v_cruise_kph
       
 
     # if stock cruise is completely disabled, then we can use our own set speed logic
     if not self.CP.enableCruise:
       self.v_cruise_kph = update_v_cruise(self.v_cruise_kph, CS.buttonEvents, self.enabled)
     elif self.CP.enableCruise and CS.cruiseState.enabled:
-      self.v_cruise_kph = CS.cruiseState.speed * CV.MS_TO_KPH
-      if int(self.v_cruise_kph) > int(self.v_cruise_kph_last):
+      new_cruise_speed_kph = int(CS.cruiseState.speed * CV.MS_TO_KPH + 0.5)
+      if new_cruise_speed_kph == self.v_cruise_kph_last + 1:
         self.v_cruise_kph += 5 - (self.v_cruise_kph % 5)
-      elif int(self.v_cruise_kph) < int(self.v_cruise_kph_last):
+      elif new_cruise_speed_kph == self.v_cruise_kph_last - 1:
         self.v_cruise_kph -= 5 - (5 - (self.v_cruise_kph % 5))
+      else:
+        self.v_cruise_kph = new_cruise_speed_kph
       self.v_cruise_kph = clip(self.v_cruise_kph, 30, 140)
+      self.v_cruise_kph_last = new_cruise_speed_kph
 
 
     self.v_cruise_raw = CS.cruiseState.speedRaw
