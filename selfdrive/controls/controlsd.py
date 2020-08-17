@@ -308,16 +308,13 @@ class Controls:
     """Compute conditional state transitions and execute actions on state transitions"""
 
     self.v_cruise_kph_last = self.v_cruise_kph
-
-    with open("/sdcard/log.txt", "a") as f:
-      f.write(json.dumps(CS.buttonEvents) + "\n")
       
 
     # if stock cruise is completely disabled, then we can use our own set speed logic
-    # if not self.CP.enableCruise:
+    if not self.CP.enableCruise:
       self.v_cruise_kph = update_v_cruise(self.v_cruise_kph, CS.buttonEvents, self.enabled)
-    # elif self.CP.enableCruise and CS.cruiseState.enabled:
-    #   self.v_cruise_kph = CS.cruiseState.speed * CV.MS_TO_KPH
+    elif self.CP.enableCruise and CS.cruiseState.enabled:
+      self.v_cruise_kph = CS.cruiseState.speed * CV.MS_TO_KPH
 
     self.v_cruise_raw = CS.cruiseState.speedRaw
 
@@ -455,7 +452,7 @@ class Controls:
     CC.cruiseControl.speedOverride = float(speed_override if self.CP.enableCruise else 0.0)
     CC.cruiseControl.accelOverride = self.CI.calc_accel_override(CS.aEgo, self.sm['plan'].aTarget, CS.vEgo, self.sm['plan'].vTarget)
 
-    CC.hudControl.setSpeed = float((self.v_cruise_kph + 10) * CV.KPH_TO_MS)
+    CC.hudControl.setSpeed = float(self.v_cruise_kph * CV.KPH_TO_MS)
     CC.hudControl.speedVisible = self.enabled
     CC.hudControl.lanesVisible = self.enabled
     CC.hudControl.leadVisible = self.sm['plan'].hasLead
