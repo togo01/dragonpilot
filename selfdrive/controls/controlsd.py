@@ -315,6 +315,12 @@ class Controls:
       self.v_cruise_kph = update_v_cruise(self.v_cruise_kph, CS.buttonEvents, self.enabled)
     elif self.CP.enableCruise and CS.cruiseState.enabled:
       self.v_cruise_kph = CS.cruiseState.speed * CV.MS_TO_KPH
+      if int(self.v_cruise_kph) > int(self.v_cruise_kph_last):
+        self.v_cruise_kph += 5 - (self.v_cruise_kph % 5)
+      elif int(self.v_cruise_kph) < int(self.v_cruise_kph_last):
+        self.v_cruise_kph -= 5 - (5 - (self.v_cruise_kph % 5))
+      self.v_cruise_kph = clip(self.v_cruise_kph, 30, 140)
+
 
     self.v_cruise_raw = CS.cruiseState.speedRaw
 
