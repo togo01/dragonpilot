@@ -317,12 +317,16 @@ class Controls:
       new_cruise_speed_kph = int(CS.cruiseState.speed * CV.MS_TO_KPH + 0.5)
       if new_cruise_speed_kph == self.v_cruise_kph_last + 1:
         self.v_cruise_kph += 5 - (self.v_cruise_kph % 5)
+        print('Cruise +: %f, %f' % (new_cruise_speed_kph, self.v_cruise_kph))
       elif new_cruise_speed_kph == self.v_cruise_kph_last - 1:
         self.v_cruise_kph -= 5 - (5 - (self.v_cruise_kph % 5))
+        print('Cruise -: %f, %f' % (new_cruise_speed_kph, self.v_cruise_kph))
       else:
         self.v_cruise_kph = new_cruise_speed_kph
+        print('Cruise S: %f, %f' % (new_cruise_speed_kph, self.v_cruise_kph))
       self.v_cruise_kph = clip(self.v_cruise_kph, 30, 140)
       self.v_cruise_kph_last = new_cruise_speed_kph
+      
 
 
     self.v_cruise_raw = CS.cruiseState.speedRaw
