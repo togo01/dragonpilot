@@ -319,7 +319,7 @@ class Controls:
         self.v_cruise_kph += 5 - (self.v_cruise_kph % 5)
         print('Cruise +: %f, %f' % (new_cruise_speed_kph, self.v_cruise_kph))
       elif new_cruise_speed_kph == self.v_cruise_kph_last - 1:
-        self.v_cruise_kph -= 5 - ((5 - self.v_cruise_kph) % 5))
+        self.v_cruise_kph -= 5 - ((5 - self.v_cruise_kph) % 5)
         print('Cruise -: %f, %f' % (new_cruise_speed_kph, self.v_cruise_kph))
       elif new_cruise_speed_kph != self.v_cruise_kph_last:
         self.v_cruise_kph = new_cruise_speed_kph
