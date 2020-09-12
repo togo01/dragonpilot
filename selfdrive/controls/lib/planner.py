@@ -52,7 +52,7 @@ _DP_CRUISE_MIN_V_FOLLOWING = [-4.0, -4.0, -3.5, -2.5, -2.0]
 _DP_CRUISE_MIN_BP = [0.0, 5.0, 10.0, 20.0, 55.0]
 
 _DP_CRUISE_MAX_V = [2.0, 2.0, 1.5, .5, .3]
-_DP_CRUISE_MAX_V_ECO = [0.8, 0.9, 1.0, 0.4, 0.2]
+_DP_CRUISE_MAX_V_ECO = [1.0, 0.9, 0.8, 0.4, 0.2]
 _DP_CRUISE_MAX_V_SPORT = [3.0, 3.5, 3.0, 2.0, 2.0]
 _DP_CRUISE_MAX_V_FOLLOWING = [1.6, 1.4, 1.4, .7, .3]
 _DP_CRUISE_MAX_BP = [0., 5., 10., 20., 55.]
@@ -63,8 +63,12 @@ _DP_TOTAL_MAX_BP = [0., 25., 55.]
 
 def dp_calc_cruise_accel_limits(v_ego, following, dp_profile):
   if following:
-    a_cruise_min = interp(v_ego, _DP_CRUISE_MIN_BP, _DP_CRUISE_MIN_V_FOLLOWING)
-    a_cruise_max = interp(v_ego, _DP_CRUISE_MAX_BP, _DP_CRUISE_MAX_V_FOLLOWING)
+    if dp_profile == DP_ECO:
+      a_cruise_min = interp(v_ego, _DP_CRUISE_MIN_BP, _DP_CRUISE_MIN_V_ECO)
+      a_cruise_max = interp(v_ego, _DP_CRUISE_MAX_BP, _DP_CRUISE_MAX_V_ECO)
+    else:
+      a_cruise_min = interp(v_ego, _DP_CRUISE_MIN_BP, _DP_CRUISE_MIN_V_FOLLOWING)
+      a_cruise_max = interp(v_ego, _DP_CRUISE_MAX_BP, _DP_CRUISE_MAX_V_FOLLOWING)
   else:
     if dp_profile == DP_ECO:
       a_cruise_min = interp(v_ego, _DP_CRUISE_MIN_BP, _DP_CRUISE_MIN_V_ECO)
