@@ -262,6 +262,9 @@ void update_sockets(UIState *s) {
     scene.dpUiBlinker = data.getDpUiBlinker();
     scene.dpUiBrightness = data.getDpUiBrightness();
     scene.dpUiVolumeBoost = data.getDpUiVolumeBoost();
+    scene.dpUiLaneBold = data.getDpUiLaneBold();
+    scene.dpUiLaneColor = data.getDpUiLaneColor();
+    scene.dpUiLaneDistanceMax = data.getDpUiLaneDistanceMax();
     scene.dpDynamicFollow = data.getDpDynamicFollow();
     scene.dpAccelProfile = data.getDpAccelProfile();
 

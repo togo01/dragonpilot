@@ -233,20 +233,36 @@ static void ui_draw_vision_lane_lines(UIState *s) {
 
   // paint lanelines
   if (scene->dpUiLane) {
+  float max_distance = scene->dpUiLaneDistanceMax ? MAX_DRAW_DISTANCE : scene->max_distance;
   line_vertices_data *pvd_ll = &s->lane_line_vertices[0];
   for (int ll_idx = 0; ll_idx < 4; ll_idx++) {
+    float lane_size = scene->dpUiLaneBold ? 0.75 : 0.25 * scene->model.getLaneLineProbs()[ll_idx];
     if (s->sm->updated("modelV2")) {
-      update_line_data(s, scene->model.getLaneLines()[ll_idx], 0.025*scene->model.getLaneLineProbs()[ll_idx], pvd_ll + ll_idx, scene->max_distance);
+      update_line_data(s, scene->model.getLaneLines()[ll_idx], lane_size, pvd_ll + ll_idx, max_distance);
     }
     NVGcolor color = nvgRGBAf(1.0, 1.0, 1.0, scene->lane_line_probs[ll_idx]);
+    if(scene->dpUiLaneColor && s->scene.controls_state.getEnabled() && (ll_idx == 1 || ll_idx == 2)) {
+        color = nvgRGBAf(0.25, 0.40, 0.82, scene->lane_line_probs[ll_idx]); 
+    }
     ui_draw_line(s, (pvd_ll + ll_idx)->v, (pvd_ll + ll_idx)->cnt, &color, nullptr);
+    
+    if (scene->dpUiLaneBold && scene->dpUiLaneColor) {
+      if ((ll_idx == 1 || ll_idx == 2) && s->scene.controls_state.getEnabled()) {
+        if(s->sm->updated("modelV2")) {
+          update_line_data(s, scene->model.getLaneLines()[ll_idx], 0.065, pvd_ll + ll_idx, max_distance);
+        }
+        color = nvgRGBAf(0.36, 0.58, 0.97, scene->lane_line_probs[ll_idx]);
+        ui_draw_line(s, (pvd_ll + ll_idx)->v, (pvd_ll + ll_idx)->cnt, &color, nullptr);
+      }
+    }
   }
 
   // paint road edges
   line_vertices_data *pvd_re = &s->road_edge_vertices[0];
   for (int re_idx = 0; re_idx < 2; re_idx++) {
+    float lane_size = scene->dpUiLaneBold ? 0.75 : 0.25;
     if (s->sm->updated("modelV2")) {
-      update_line_data(s, scene->model.getRoadEdges()[re_idx], 0.025, pvd_re + re_idx, scene->max_distance);
+      update_line_data(s, scene->model.getRoadEdges()[re_idx], lane_size, pvd_re + re_idx, max_distance);
     }
     NVGcolor color = nvgRGBAf(1.0, 0.0, 0.0, std::clamp<float>(1.0-scene->road_edge_stds[re_idx], 0.0, 1.0));
     ui_draw_line(s, (pvd_re + re_idx)->v, (pvd_re + re_idx)->cnt, &color, nullptr);

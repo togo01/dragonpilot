@@ -83,6 +83,9 @@ confs = [
   {'name': 'dp_ui_blinker', 'default': False, 'type': 'Bool', 'depends': [{'name': 'dp_driving_ui', 'vals': [True]}, {'name': 'dp_ui_screen_off_driving', 'vals': [False]}, {'name': 'dp_app_waze', 'vals': [False]}, {'name': 'dp_app_hr', 'vals': [False]}], 'conf_type': ['param', 'struct']},
   {'name': 'dp_ui_brightness', 'default': 0, 'type': 'UInt8', 'min': 0, 'max': 100, 'conf_type': ['param', 'struct']},
   {'name': 'dp_ui_volume_boost', 'default': 0, 'type': 'Int8', 'min': -100, 'max': 100, 'conf_type': ['param', 'struct']},
+  {'name': 'dp_ui_lane_bold', 'default': False, 'type': 'Bool', 'conf_type': ['param']},
+  {'name': 'dp_ui_lane_color', 'default': False, 'type': 'Bool', 'conf_type': ['param']},
+  {'name': 'dp_ui_lane_distance_max', 'default': False, 'type': 'Bool', 'conf_type': ['param']},
   # Apps
   {'name': 'dp_app_auto_update', 'default': True, 'type': 'Bool', 'conf_type': ['param', 'struct']},
   {'name': 'dp_app_ext_gps', 'default': False, 'type': 'Bool', 'conf_type': ['param', 'struct']},

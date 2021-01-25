@@ -2226,4 +2226,7 @@ struct DragonConf {
   dpDischargingAt @72 :UInt8;
   dpIsUpdating @73 :Bool;
   dpTimebombAssist @74 :Bool;
+  dpUiLaneBold @75 :Bool;
+  dpUiLaneColor @76 :Bool;
+  dpUiLaneDistanceMax @77 :Bool;
 }

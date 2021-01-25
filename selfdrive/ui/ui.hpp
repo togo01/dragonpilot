@@ -162,6 +162,9 @@ typedef struct UIScene {
   bool dpUiBlinker;
   int dpUiBrightness;
   int dpUiVolumeBoost;
+  bool dpUiLaneBold;
+  bool dpUiLaneColor;
+  bool dpUiLaneDistanceMax;
   std::string dpIpAddr;
   // for minimal UI
   float angleSteersDes;
